@@ -1,0 +1,46 @@
+{
+  "name": "@local/dsh-vcc",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./index.js",
+  "description": "Deterministic, no-LLM conversation compaction (VCC) with lossless (#N) recall for DeepSeek Harness; adapted from pi-vcc (MIT).",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json",
+    "./lib/*": "./lib/*",
+    "./src/*": "./src/*"
+  },
+  "files": [
+    "index.js",
+    "lib",
+    "src",
+    "cordis.patch.yml",
+    "README.md",
+    "NOTICE"
+  ],
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "compaction",
+    "recall",
+    "vcc",
+    "deterministic",
+    "no-llm"
+  ],
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-compaction": "*",
+    "@deepseek-ai/dsh-compaction-basic": "*",
+    "@deepseek-ai/dsh-tools": "*",
+    "@deepseek-ai/dsh-commands": "*",
+    "@deepseek-ai/schemastery": "*",
+    "@deepseek-ai/cordis": "*"
+  }
+}
