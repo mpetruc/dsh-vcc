@@ -1,7 +1,16 @@
 import { textOf } from "./content.js";
 import { sanitize } from "./sanitize.js";
+// System-generated user-role events that are not user intent. The harness
+// records approval-policy changes, permission toggles, etc. as user messages
+// carrying an explicit `source.kind`; without this filter they seed
+// [Session Goal] and the brief transcript exactly like real instructions.
+// `compact-checkpoint` messages (the auto-generated resume instructions) are
+// deliberately NOT in this set and keep flowing through normalization.
+const SYSTEM_USER_NOISE_KINDS = new Set(["user-approval"]);
 const normalizeOne = (msg, msgIndex) => {
     if (msg.role === "user") {
+        if (SYSTEM_USER_NOISE_KINDS.has(msg.source?.kind))
+            return [];
         const blocks = [];
         const text = sanitize(textOf(msg.content));
         if (text)
